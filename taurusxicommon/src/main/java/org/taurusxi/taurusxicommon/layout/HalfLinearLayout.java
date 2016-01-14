@@ -25,16 +25,6 @@ public class HalfLinearLayout extends LinearLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-//        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec)); // Children are just made to fill our space.
-//        int childWidthSize = getMeasuredWidth();
-//        int childHeightSize = getMeasuredHeight();
-//        //高度是宽度的一半
-//        widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
-//        heightMeasureSpec = widthMeasureSpec / 2;
-//        MLog.e("HalfLayout","width = "+widthMeasureSpec+" hight ="+heightMeasureSpec);
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         if (mode != MeasureSpec.EXACTLY) {
             throw new IllegalStateException("layout_width must be match_parent");
