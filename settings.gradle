@@ -1,0 +1,8 @@
+include ':app'
+
+include ':taurusxicommon'
+
+include ':SwipeLayoutLibrary'
+
+
+project(':SwipeLayoutLibrary').projectDir = new File('ThirdParty/SwipeLayoutLibrary')

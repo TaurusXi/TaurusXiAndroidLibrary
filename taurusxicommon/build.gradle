@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion COMPLILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion COMPLILE_SDK_VERSION
+        versionCode COMMON_VERSION_CODE as int
+        versionName COMMON_VERSION_NAME
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+            java {
+                srcDir 'src/main/java'
+                srcDir 'src/main/java-db'
+            }
+
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile project(':SwipeLayoutLibrary')
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${ANDROID_LIB_SUPPORT_VERSION}"
+    compile "com.android.support:support-v4:${ANDROID_LIB_SUPPORT_VERSION}"
+    compile "com.android.support:recyclerview-v7:${ANDROID_LIB_SUPPORT_VERSION}"
+    compile "com.android.support:design:${ANDROID_LIB_SUPPORT_VERSION}"
+
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'de.greenrobot:greendao:2.0.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    compile "com.google.code.gson:gson:2.4"
+    compile 'de.greenrobot:eventbus:2.4.0'
+}
