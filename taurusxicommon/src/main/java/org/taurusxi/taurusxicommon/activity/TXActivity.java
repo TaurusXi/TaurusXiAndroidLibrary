@@ -35,8 +35,6 @@ public abstract class TXActivity extends TXSwipeActivity {
         initEvents(savedInstanceState);
         initData(savedInstanceState);
         setKeyBoardListener();
-        //初始化Logger
-        MLog.init();
     }
 
     @Override

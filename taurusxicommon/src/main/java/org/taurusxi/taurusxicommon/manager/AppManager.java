@@ -3,6 +3,8 @@ package org.taurusxi.taurusxicommon.manager;
 import android.app.Activity;
 import android.app.Application;
 
+import org.taurusxi.taurusxicommon.utils.MLog;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,6 +49,13 @@ public class AppManager {
 
     public void attachApplication(Application application) {
         this.application = application;
+        init();
+
+    }
+
+    public void init() {
+        //初始化Logger
+        MLog.init();
     }
 
     public Application getApplication() {
