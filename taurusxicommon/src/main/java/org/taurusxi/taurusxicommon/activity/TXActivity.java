@@ -10,6 +10,8 @@ import org.taurusxi.taurusxicommon.annotation.Keyboard;
 import org.taurusxi.taurusxicommon.manager.AppManager;
 import org.taurusxi.taurusxicommon.utils.MLog;
 import org.taurusxi.taurusxicommon.utils.StringUtils;
+import org.taurusxi.taurusxicommon.utils.logger.LogLevel;
+import org.taurusxi.taurusxicommon.utils.logger.Logger;
 
 import java.lang.reflect.Field;
 
@@ -33,6 +35,8 @@ public abstract class TXActivity extends TXSwipeActivity {
         initEvents(savedInstanceState);
         initData(savedInstanceState);
         setKeyBoardListener();
+        //初始化Logger
+        MLog.init();
     }
 
     @Override
@@ -74,18 +78,6 @@ public abstract class TXActivity extends TXSwipeActivity {
 //            toast.setGravity(Gravity.TOP, 0, DisplayUtil.dip2px(56) + DisplayUtil.statusBarHeight);
             toast.show();
         }
-    }
-
-    public void e(String msg) {
-        MLog.e(TAG, StringUtils.formatNull(msg));
-    }
-
-    public void d(String msg) {
-        MLog.d(TAG, StringUtils.formatNull(msg));
-    }
-
-    public void v(String msg) {
-        MLog.v(TAG, StringUtils.formatNull(msg));
     }
 
 

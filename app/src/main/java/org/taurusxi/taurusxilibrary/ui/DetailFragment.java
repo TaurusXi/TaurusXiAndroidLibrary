@@ -18,6 +18,7 @@ import org.taurusxi.taurusxicommon.keyValueModel.utils.SettingHelper;
 import org.taurusxi.taurusxicommon.listener.TXResponce;
 import org.taurusxi.taurusxicommon.task.NetworkTask;
 import org.taurusxi.taurusxicommon.utils.MLog;
+import org.taurusxi.taurusxicommon.utils.logger.Logger;
 import org.taurusxi.taurusxilibrary.R;
 import org.taurusxi.taurusxilibrary.api.ApiImpl;
 import org.taurusxi.taurusxilibrary.model.CircleModel;
@@ -62,6 +63,9 @@ public class DetailFragment extends TXFragment {
             fromDataTextView.setText(key+"，滑动退出界面.");
         }
         intentTextView.setText("点击跳转详情___"+ sCount);
+
+        Logger.d("aaaa");
+        Logger.e("zzzzz");
 
 
     }
