@@ -8,14 +8,11 @@ import android.widget.Toast;
 
 import org.taurusxi.taurusxicommon.annotation.Keyboard;
 import org.taurusxi.taurusxicommon.manager.AppManager;
-import org.taurusxi.taurusxicommon.utils.MLog;
 import org.taurusxi.taurusxicommon.utils.StringUtils;
-import org.taurusxi.taurusxicommon.utils.logger.LogLevel;
-import org.taurusxi.taurusxicommon.utils.logger.Logger;
 
 import java.lang.reflect.Field;
 
-import butterknife.ButterKnife;
+//import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 /**
@@ -40,7 +37,7 @@ public abstract class TXActivity extends TXSwipeActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
     }
 
     protected abstract int getContentView();
@@ -148,7 +145,7 @@ public abstract class TXActivity extends TXSwipeActivity {
     @Override
     protected void onDestroy() {
         context = null;
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
         AppManager.getInstance().removeActivity(this);
         super.onDestroy();
     }

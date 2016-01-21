@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion COMPLILE_SDK_VERSION as int
@@ -13,6 +14,7 @@ android {
                 srcDir 'src/main/java-model'
             }
         }
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
@@ -28,6 +30,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+//    dexOptions {
+//        incremental true
+//        preDexLibraries = false
+//        jumboMode = false
+//        javaMaxHeapSize "4g"
+//    }
 }
 
 dependencies {
@@ -35,5 +51,9 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.anko:anko-support-v4:0.8"
 
 }
+
+

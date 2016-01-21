@@ -13,7 +13,7 @@ import android.widget.Toast;
 import org.taurusxi.taurusxicommon.utils.MLog;
 import org.taurusxi.taurusxicommon.utils.StringUtils;
 
-import butterknife.ButterKnife;
+//import butterknife.ButterKnife;
 
 /**
  * Created by wumin on 16/1/14.
@@ -49,7 +49,7 @@ public abstract class TXFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getContentView(), container, false);
-        ButterKnife.bind(this, rootView);
+//        ButterKnife.bind(this, rootView);
 
         initView(savedInstanceState);
         initEvents(savedInstanceState);
@@ -103,7 +103,7 @@ public abstract class TXFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        ButterKnife.unbind(this);
+//        ButterKnife.unbind(this);
         super.onDestroyView();
     }
 }

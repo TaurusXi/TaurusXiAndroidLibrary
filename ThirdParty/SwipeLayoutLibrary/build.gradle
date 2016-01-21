@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion COMPLILE_SDK_VERSION as int
-        versionCode 1
-        versionName version
+        versionCode APP_VERSION_CODE as int
+        versionName APP_VERSION_NAME
     }
 }
 
