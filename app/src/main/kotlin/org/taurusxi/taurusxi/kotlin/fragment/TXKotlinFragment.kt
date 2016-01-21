@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlin.properties.Delegates
 
 /**
  * Created by wumin on 16/1/21.
@@ -17,6 +16,8 @@ abstract class TXKotlinFragment : Fragment() {
     protected final val TAG: String by lazy { this.javaClass.simpleName }
 
     protected abstract val layoutResource: Int
+
+    protected val intentData:Bundle? by lazy { getArguments() }
 
     var rootView: View? = null
     //    protected val inputMethodManager: InputMethodManager by lazy { context?.getSystemService(TXSwipeActivity.INPUT_METHOD_SERVICE) as InputMethodManager }
@@ -41,7 +42,7 @@ abstract class TXKotlinFragment : Fragment() {
         rootView = inflater!!.inflate(layoutResource, container, false)
         initView(savedInstanceState)
         initEvent(savedInstanceState)
-        initData(savedInstanceState, getArguments())
+        initData(savedInstanceState)
         return rootView
     }
 
@@ -49,7 +50,7 @@ abstract class TXKotlinFragment : Fragment() {
 
     }
 
-    protected open fun initData(savedInstanceState: Bundle?, extraData: Bundle?) {
+    protected open fun initData(savedInstanceState: Bundle?) {
 
     }
 

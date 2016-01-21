@@ -1,4 +1,4 @@
-package org.taurusxi.taurusxilibrary.ui
+package org.taurusxi.taurusxilibrary.ui.fragment
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import org.jetbrains.anko.find
+import org.taurusxi.taurusxi.kotlin.extension.singleClick
 import org.taurusxi.taurusxi.kotlin.fragment.TXKotlinFragment
 import org.taurusxi.taurusxi.kotlin.utils.find
 import org.taurusxi.taurusxi.kotlin.utils.hasKitKat
@@ -20,17 +21,19 @@ import org.taurusxi.taurusxicommon.imageLoader.listener.SimpleImageLoaderListene
 import org.taurusxi.taurusxicommon.keyValueModel.utils.SettingHelper
 import org.taurusxi.taurusxicommon.listener.SimpleTXResponce
 import org.taurusxi.taurusxicommon.task.NetworkTask
+import org.taurusxi.taurusxicommon.utils.JSONHelper
 import org.taurusxi.taurusxicommon.utils.MLog
 import org.taurusxi.taurusxilibrary.R
 import org.taurusxi.taurusxilibrary.api.ApiImpl
 import org.taurusxi.taurusxilibrary.model.CircleModel
+import org.taurusxi.taurusxilibrary.model.DataModel
+import org.taurusxi.taurusxilibrary.model.SampleData
 import kotlin.properties.Delegates
 
 /**
  * Created by wumin on 16/1/21.
  */
-class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
-
+class DetailKtFragment : TXKotlinFragment(), View.OnClickListener {
 
     companion object{
         var count = 1
@@ -46,33 +49,48 @@ class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
 
     var simpleAdapter by Delegates.notNull<SampleAdapter>()
 
-    var dd:String by Delegates.observable("xxx"){
-        prop,old,new ->{
+    var dd:String by Delegates.observable(String()){
+        prop,old,new ->
             MLog.e("prop:${prop}__old:${old}__new:${new}")
-        }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+
+        val data: DataModel = JSONHelper.getInstance().fromGson(SampleData.SAMPLE_DATA, DataModel::class.java)
+
         dd = "AAA"
         simpleAdapter = SampleAdapter(context as Context)
         listView.adapter = simpleAdapter
-        find<Button>(R.id.network).setOnClickListener(this)
-        find<Button>(R.id.intent).setOnClickListener(this)
+
+        find<Button>(R.id.network).singleClick {
+            ApiImpl.getCircleList(object : SimpleTXResponce<CircleModel>(){
+                override fun onSuccess(model: CircleModel?) {
+                    simpleAdapter.setCount(model?.datas)
+                }
+
+                override fun onFinish(task: NetworkTask?): Boolean {
+                    return checkContext()
+                }
+            })
+        }
+        find<Button>(R.id.intent).singleClick(500) {
+
+        }
         find<Button>(R.id.sql_save).setOnClickListener(this)
 
-        with(listView){
+        with(listView) {
             val layout = layoutParams
 
         }
 
-       hasKitKat {
+        hasKitKat {
 
-       }
+        }
 
     }
 
-    override fun initData(savedInstanceState: Bundle?, extraData: Bundle?) {
-
+    override fun initData(savedInstanceState: Bundle?) {
+        if(intentData==null){}
     }
 
     override fun initEvent(savedInstanceState: Bundle?) {
@@ -83,7 +101,7 @@ class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
         when(v!!.id){
             R.id.intent ->{
                 count++
-                CustomTXActivity.startFragment(context,DetailKtFragment::class.java)
+                CustomTXActivity.startFragment(context, DetailKtFragment::class.java)
             }
             R.id.network ->{
                 ApiImpl.getCircleList(object : SimpleTXResponce<CircleModel>(){
@@ -105,7 +123,7 @@ class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
     }
 
 
-    class SampleAdapter(context:Context):SimpleTXAdapter<CircleModel.Circle,ViewHolder>(context){
+    class SampleAdapter(context: Context): SimpleTXAdapter<CircleModel.Circle, ViewHolder>(context){
 
         override fun onCreateViewHodler(convertView: View?): ViewHolder? {
             return ViewHolder(convertView!!)
@@ -113,7 +131,7 @@ class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
 
         override fun onBindViewHolder(viewHolder: ViewHolder?, position: Int) {
             val circle = listData.get(position)
-            ImageLoaderHelper.getInstance().loadImage(viewHolder!!.imageView,"http://pic.shantoo.cn/" +circle.coverKey,object :SimpleImageLoaderListener(){
+            ImageLoaderHelper.getInstance().loadImage(viewHolder!!.imageView,"http://pic.shantoo.cn/" +circle.coverKey,object : SimpleImageLoaderListener(){
                 override fun loadComplete(url: String?, imageView: ImageView?, bitmap: Bitmap?) {
                     MLog.e(TAG,"url:${url}—加载完成")
                 }
@@ -125,7 +143,6 @@ class DetailKtFragment :TXKotlinFragment(),View.OnClickListener{
     }
 
     class ViewHolder (val view: View){
-
-        val imageView:ImageView = view.find(R.id.imageView)
+        val imageView: ImageView = view.find(R.id.imageView)
     }
 }

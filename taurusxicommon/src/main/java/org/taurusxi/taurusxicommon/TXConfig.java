@@ -5,5 +5,5 @@ package org.taurusxi.taurusxicommon;
  */
 public class TXConfig {
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 }

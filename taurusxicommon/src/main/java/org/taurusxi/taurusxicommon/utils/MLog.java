@@ -1,7 +1,5 @@
 package org.taurusxi.taurusxicommon.utils;
 
-import android.util.Log;
-
 import org.taurusxi.taurusxicommon.TXConfig;
 import org.taurusxi.taurusxicommon.utils.logger.LogLevel;
 import org.taurusxi.taurusxicommon.utils.logger.Logger;

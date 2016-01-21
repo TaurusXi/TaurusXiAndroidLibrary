@@ -1,9 +1,11 @@
 package org.taurusxi.taurusxi.kotlin.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import me.imid.swipebacklayout.lib.SwipeBackLayout
+import org.taurusxi.taurusxi.kotlin.utils.Constants
 import org.taurusxi.taurusxicommon.activity.TXSwipeActivity
 import org.taurusxi.taurusxicommon.annotation.Keyboard
 import org.taurusxi.taurusxicommon.manager.AppManager
@@ -21,6 +23,10 @@ import org.taurusxi.taurusxicommon.utils.StringUtils
     protected val inputMethodManager:InputMethodManager by lazy { getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager }
 
     protected var context:TXKotlinActivity? = null
+
+    protected val intentData: Bundle? by lazy {
+        if(intent == null){ null }else{ intent.getBundleExtra(Constants.ACTIVITY_EXTRA) }
+    }
 
     override fun needSwipeBack(): Boolean {
         return true

@@ -37,7 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainKTActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/UnTransportTheme">
             <intent-filter>
@@ -49,6 +49,12 @@
 
         <activity
             android:name="org.taurusxi.taurusxicommon.activity.CustomTXActivity"
+            android:label="@string/app_name"
+            android:theme="@style/TransportTheme">
+
+        </activity>
+        <activity
+            android:name="org.taurusxi.taurusxi.kotlin.activity.CustomKTActivity"
             android:label="@string/app_name"
             android:theme="@style/TransportTheme">
 
