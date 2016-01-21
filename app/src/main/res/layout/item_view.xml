@@ -29,12 +29,12 @@
         android:layout_height="wrap_content"
         android:padding="2dp">
 
-        <com.antonioleiva.bandhookkotlin.ui.custom.SquareImageView
+        <org.taurusxi.taurusxicommon.layout.SquareImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:background="@color/cardview_dark_background"/>
+            android:background="@color/background_material_dark"/>
 
         <TextView
             android:id="@+id/title"

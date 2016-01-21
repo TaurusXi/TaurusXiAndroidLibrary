@@ -23,7 +23,7 @@ data class DataModel(val similarartists: SimilarartistModel)
 
 data class SimilarartistModel(@SerializedName("artist") val artistList: List<Artist>, @SerializedName("@attr") val attr: Attr)
 
-data class Artist(val name: String, val mbid: String, val match: String, val url: String, @SerializedName("image") val imageList: List<Image>)
+data class Artist(val name: String ="", val mbid: String ="", val match: String ="", val url: String ="", @SerializedName("image") val imageList: List<Image> = arrayListOf())
 
 data class Image(@SerializedName("#text") val url: String, val size: String)
 

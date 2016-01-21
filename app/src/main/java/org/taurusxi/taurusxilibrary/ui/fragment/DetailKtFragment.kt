@@ -138,11 +138,11 @@ class DetailKtFragment : TXKotlinFragment(), View.OnClickListener {
             })
         }
 
-        override fun getItemLayout() = R.layout.item_imageview
+        override fun getItemLayout() = R.layout.item_view
 
     }
 
     class ViewHolder (val view: View){
-        val imageView: ImageView = view.find(R.id.imageView)
+        val imageView: ImageView = view.find(R.id.image)
     }
 }
