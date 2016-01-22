@@ -28,15 +28,5 @@ inline public fun <reified T:TXKotlinActivity> Activity.startActivity(extraData:
 }
 
 
-inline public fun <reified T:Fragment> Activity.startFragment(extraData:Bundle? = null){
-    if(this == null){
-        return
-    }
-    val intent = Intent(this, CustomKTActivity::class.java)
-    if (extraData != null) {
-        intent.putExtra(CustomKTActivity.BUNDLE_EXTRA, extraData)
-    }
-    intent.putExtra(CustomKTActivity.FRAGMENT_CLASS, T::class.java)
-    ActivityCompat.startActivity(this,intent,null)
-}
+
 

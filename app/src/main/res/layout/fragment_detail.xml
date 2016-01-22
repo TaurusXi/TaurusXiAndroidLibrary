@@ -4,6 +4,8 @@
     android:background="@android:color/white"
     android:layout_height="match_parent">
 
+    <include layout="@layout/includes_toolbar"/>
+
     <TextView
         android:text="等待数据，滑动退出界面"
         android:layout_margin="10dp"

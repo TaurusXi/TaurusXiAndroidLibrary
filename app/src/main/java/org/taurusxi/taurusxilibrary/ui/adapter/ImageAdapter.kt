@@ -47,6 +47,7 @@ class ViewHolder(view: View,val onItemClickListener:((Artist)->Unit)?):RecyclerV
 
     fun setItem(item: Artist) {
         itemView?.singleClick { onItemClickListener?.invoke(item) }
+        itemView?.singleClick(50){ onItemClickListener?.invoke(item) }
         title?.text = item.name
         ImageLoaderHelper.getInstance().loadImage(image,item.imageList.get(2).url,object : SimpleImageLoaderListener(){
             override fun loadComplete(url: String?, imageView: ImageView?, bitmap: Bitmap?) {

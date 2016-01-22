@@ -41,6 +41,7 @@ abstract class TXKotlinFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater!!.inflate(layoutResource, container, false)
         initView(savedInstanceState)
+
         initEvent(savedInstanceState)
         initData(savedInstanceState)
         return rootView

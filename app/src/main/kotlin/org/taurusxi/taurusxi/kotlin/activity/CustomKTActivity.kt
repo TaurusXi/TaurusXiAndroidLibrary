@@ -3,22 +3,17 @@ package org.taurusxi.taurusxi.kotlin.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-
-import org.taurusxi.taurusxicommon.R
-import org.taurusxi.taurusxicommon.activity.TXActivity
+import org.taurusxi.taurusxilibrary.R
 import org.taurusxi.taurusxicommon.utils.MLog
 
 /**
  * Created by wumin on 16/1/14.
  */
-class CustomKTActivity : TXActivity() {
-
-    override fun getContentView(): Int {
-        return R.layout.custom_activity_layout
-    }
+class CustomKTActivity : TXKotlinActivity() {
+    override val layoutResource: Int
+        get() = R.layout.activity_custom
 
     override fun initView(savedInstanceState: Bundle?) {
         updateFragment(savedInstanceState)
@@ -27,8 +22,8 @@ class CustomKTActivity : TXActivity() {
     private fun updateFragment(savedInstanceState: Bundle?) {
         val intent = intent ?: return
 
-        val bundleExtra = intent.getBundleExtra(BUNDLE_EXTRA)
-        val clazz = intent.getSerializableExtra(FRAGMENT_CLASS) as Class<out Fragment> ?: return
+        val bundleExtra = intentData
+        val clazz = intent.getSerializableExtra(FRAGMENT_CLASS) as Class<out Fragment>
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -46,7 +41,7 @@ class CustomKTActivity : TXActivity() {
         fragmentTransaction.commitAllowingStateLoss()
     }
 
-    override fun initEvents(savedInstanceState: Bundle?) {
+    override fun initEvent(savedInstanceState: Bundle?) {
 
     }
 
@@ -56,7 +51,7 @@ class CustomKTActivity : TXActivity() {
 
     companion object {
 
-        public  val BUNDLE_EXTRA = "b_extra"
+        public val BUNDLE_EXTRA = "b_extra"
         public val FRAGMENT_CLASS = "f_class"
         public val FRAGMENT_TAG = "f_tag"
 
@@ -78,4 +73,16 @@ class CustomKTActivity : TXActivity() {
             startFragment(activity, null, clazz)
         }
     }
+}
+
+inline public fun <reified T:Fragment> Activity.startFragment(extraData:Bundle? = null){
+    if(this == null){
+        return
+    }
+    val intent = Intent(this, CustomKTActivity::class.java)
+    if (extraData != null) {
+        intent.putExtra(CustomKTActivity.BUNDLE_EXTRA, extraData)
+    }
+    intent.putExtra(CustomKTActivity.FRAGMENT_CLASS, T::class.java)
+    ActivityCompat.startActivity(this,intent,null)
 }

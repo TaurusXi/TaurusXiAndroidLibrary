@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import org.jetbrains.anko.find
-import org.jetbrains.anko.findOptional
 import org.taurusxi.taurusxi.kotlin.activity.TXKotlinActivity
-import org.taurusxi.taurusxi.kotlin.utils.startFragment
+import org.taurusxi.taurusxi.kotlin.activity.startFragment
 import org.taurusxi.taurusxilibrary.R
 import org.taurusxi.taurusxilibrary.model.Artist
 import org.taurusxi.taurusxilibrary.ui.adapter.ImageAdapter
@@ -47,12 +46,6 @@ class MainActivity : TXKotlinActivity(),MainView {
         presenter.showGridNetworkData()
     }
 
-    public fun demoIntent(view: View){
-        val bundle = Bundle()
-        bundle.putString("key","痴痴缠缠")
-        startFragment<DetailKtFragment>(bundle)
-    }
-
     override fun onResume() {
         super.onResume()
     }
@@ -66,6 +59,15 @@ class MainActivity : TXKotlinActivity(),MainView {
     }
 
     fun onArtistClicked(item: Artist) {
-//        view.navigateToDetail(item.id)
+        val bundle = Bundle()
+        bundle.putString("key","痴痴缠缠")
+        startFragment<DetailKtFragment>()
+    }
+
+    fun xx(){
+
+        val arrayData = listOf(1,2,3,4,5,6,7,8,9,10)
+        arrayData.filter { it>5 }.map { it*2 }
+
     }
 }
