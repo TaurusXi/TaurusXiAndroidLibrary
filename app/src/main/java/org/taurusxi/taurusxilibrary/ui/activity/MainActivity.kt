@@ -6,6 +6,7 @@ import android.view.View
 import org.jetbrains.anko.find
 import org.taurusxi.taurusxi.kotlin.activity.TXKotlinActivity
 import org.taurusxi.taurusxi.kotlin.activity.startFragment
+import org.taurusxi.taurusxicommon.utils.MLog
 import org.taurusxi.taurusxilibrary.R
 import org.taurusxi.taurusxilibrary.model.Artist
 import org.taurusxi.taurusxilibrary.ui.adapter.ImageAdapter
@@ -48,6 +49,7 @@ class MainActivity : TXKotlinActivity(),MainView {
 
     override fun onResume() {
         super.onResume()
+        MLog.e("大帅阳真帅")
     }
 
     override fun showArtist(artists: List<Artist>) {
