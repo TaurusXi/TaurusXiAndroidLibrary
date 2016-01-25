@@ -26,7 +26,7 @@ abstract class TXKotlinActivity : TXSwipeActivity() {
 
     protected var context: TXKotlinActivity? = null
 
-    val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
+    protected val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
     /**
      *  Activity Intent传递过来的数据
@@ -57,17 +57,20 @@ abstract class TXKotlinActivity : TXSwipeActivity() {
         setKeyBoardListener()
     }
 
-    private  fun initToolBar(savedInstanceState: Bundle?) {
+    private fun initToolBar(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
+        toolbar.title = "YYYY"
+        toolbar.title
         toolbar.background.alpha = 255
-        actionBar?.title = "MAIN"
+        getActionBar().setHomeButtonEnabled(true)
+        toolbar.setLogo(R.mipmap.ic_launcher)
         initActionBar(savedInstanceState)
     }
 
     /**
      *  初始ActionBar
      * */
-    protected open fun initActionBar(savedInstanceState: Bundle?){
+    protected open fun initActionBar(savedInstanceState: Bundle?) {
 
     }
 
@@ -80,6 +83,8 @@ abstract class TXKotlinActivity : TXSwipeActivity() {
     }
 
     private fun setKeyBoardListener() {
+
+
         val currentTimes = System.currentTimeMillis()
         val clazz = this.javaClass
         val fields = clazz.declaredFields;
@@ -167,4 +172,5 @@ abstract class TXKotlinActivity : TXSwipeActivity() {
         }
 
     }
+
 }

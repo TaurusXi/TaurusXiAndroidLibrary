@@ -2,6 +2,7 @@ package org.taurusxi.taurusxicommon.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,7 +40,6 @@ public class CustomTXActivity extends TXActivity {
 
         Bundle bundleExtra = intent.getBundleExtra(BUNDLE_EXTRA);
         Class<? extends Fragment> clazz = (Class<? extends Fragment>) intent.getSerializableExtra(FRAGMENT_CLASS);
-
         if (clazz == null) {
             return;
         }

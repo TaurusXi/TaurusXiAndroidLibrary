@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import java.lang.ref.WeakReference
 
 /**
  * Created by wumin on 16/1/21.
@@ -20,9 +21,10 @@ abstract class TXKotlinFragment : Fragment() {
     protected val intentData:Bundle? by lazy { getArguments() }
 
     var rootView: View? = null
-    //    protected val inputMethodManager: InputMethodManager by lazy { context?.getSystemService(TXSwipeActivity.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     protected var context: Activity? = null
+
+    protected val weakSelf = WeakReference(this)
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -45,6 +47,10 @@ abstract class TXKotlinFragment : Fragment() {
         initEvent(savedInstanceState)
         initData(savedInstanceState)
         return rootView
+    }
+
+    public  open fun initToolBar(savedInstanceState: Bundle?){
+
     }
 
     protected open fun initView(savedInstanceState: Bundle?) {

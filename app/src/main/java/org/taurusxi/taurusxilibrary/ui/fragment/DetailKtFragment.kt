@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import org.jetbrains.anko.activityUiThreadWithContext
+import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.taurusxi.taurusxi.kotlin.extension.singleClick
 import org.taurusxi.taurusxi.kotlin.fragment.TXKotlinFragment
@@ -21,13 +23,10 @@ import org.taurusxi.taurusxicommon.imageLoader.listener.SimpleImageLoaderListene
 import org.taurusxi.taurusxicommon.keyValueModel.utils.SettingHelper
 import org.taurusxi.taurusxicommon.listener.SimpleTXResponce
 import org.taurusxi.taurusxicommon.task.NetworkTask
-import org.taurusxi.taurusxicommon.utils.JSONHelper
 import org.taurusxi.taurusxicommon.utils.MLog
 import org.taurusxi.taurusxilibrary.R
 import org.taurusxi.taurusxilibrary.api.ApiImpl
 import org.taurusxi.taurusxilibrary.model.CircleModel
-import org.taurusxi.taurusxilibrary.model.DataModel
-import org.taurusxi.taurusxilibrary.model.SampleData
 import kotlin.properties.Delegates
 
 /**
@@ -54,10 +53,11 @@ class DetailKtFragment : TXKotlinFragment(), View.OnClickListener {
             MLog.e("prop:${prop}__old:${old}__new:${new}")
     }
 
+    override fun initToolBar(savedInstanceState: Bundle?) {
+
+    }
+
     override fun initView(savedInstanceState: Bundle?) {
-
-        val data: DataModel = JSONHelper.getInstance().fromGson(SampleData.SAMPLE_DATA, DataModel::class.java)
-
         dd = "AAA"
         simpleAdapter = SampleAdapter(context as Context)
         listView.adapter = simpleAdapter
@@ -94,7 +94,15 @@ class DetailKtFragment : TXKotlinFragment(), View.OnClickListener {
     }
 
     override fun initEvent(savedInstanceState: Bundle?) {
+        context?.async() {
+            Thread.sleep(2000)
+            activityUiThreadWithContext{
+                MLog.i("回调至主线程:_${System.currentTimeMillis()}")
+            }
+            MLog.i("延时:_${System.currentTimeMillis()}")
+        }
 
+        MLog.i("info:_${System.currentTimeMillis()}")
     }
 
     override fun onClick(v: View?) {

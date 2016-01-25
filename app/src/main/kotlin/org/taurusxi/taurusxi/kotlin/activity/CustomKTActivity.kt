@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import org.taurusxi.taurusxilibrary.R
+import org.taurusxi.taurusxi.kotlin.fragment.TXKotlinFragment
 import org.taurusxi.taurusxicommon.utils.MLog
+import org.taurusxi.taurusxilibrary.R
+import kotlin.properties.Delegates
 
 /**
  * Created by wumin on 16/1/14.
@@ -15,23 +17,28 @@ class CustomKTActivity : TXKotlinActivity() {
     override val layoutResource: Int
         get() = R.layout.activity_custom
 
+    var fragment by Delegates.notNull<TXKotlinFragment>()
+
     override fun initView(savedInstanceState: Bundle?) {
         updateFragment(savedInstanceState)
+    }
+
+    override fun initActionBar(savedInstanceState: Bundle?) {
+        fragment.initToolBar(savedInstanceState)
     }
 
     private fun updateFragment(savedInstanceState: Bundle?) {
         val intent = intent ?: return
 
         val bundleExtra = intentData
-        val clazz = intent.getSerializableExtra(FRAGMENT_CLASS) as Class<out Fragment>
+        val clazz = intent.getSerializableExtra(FRAGMENT_CLASS) as Class<out TXKotlinFragment>
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        var fragment: Fragment? = null
         try {
             fragment = clazz.newInstance()
             if (bundleExtra != null) {
-                fragment!!.arguments = bundleExtra
+                fragment.arguments = bundleExtra
             }
         } catch (e: Exception) {
             MLog.e(TAG, "类反射加载失败")
