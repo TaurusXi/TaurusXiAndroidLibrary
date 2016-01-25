@@ -49,7 +49,7 @@ class MainActivity : TXKotlinActivity(),MainView {
 
     override fun onResume() {
         super.onResume()
-        MLog.e("Resume")
+        MLog.e("大帅阳真帅")
     }
 
     override fun showArtist(artists: List<Artist>) {
